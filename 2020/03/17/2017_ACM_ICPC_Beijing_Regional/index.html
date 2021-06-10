@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/Rice/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/Rice/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/Rice/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/Rice/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/Rice/css/main.css">
+
+
+<link rel="stylesheet" href="/Rice/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"kiritostna.github.io","root":"/Rice/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="比赛地址 E - Cats and Fish优先队列维护一个$pair$, 第一关键字为吃完的时间，第二关键字为$&lt;速度，id&gt;$， 然后不断的模拟操作即可。 注意最后遍历完所有的鱼之后，要再把队列前面刚好吃完的记录完整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017 ACM ICPC Beijing Regional">
+<meta property="og:url" content="https://kiritostna.github.io/Rice/2020/03/17/2017_ACM_ICPC_Beijing_Regional/index.html">
+<meta property="og:site_name" content="Rice&#39;s Blog">
+<meta property="og:description" content="比赛地址 E - Cats and Fish优先队列维护一个$pair$, 第一关键字为吃完的时间，第二关键字为$&lt;速度，id&gt;$， 然后不断的模拟操作即可。 注意最后遍历完所有的鱼之后，要再把队列前面刚好吃完的记录完整">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-10T15:08:18.983Z">
+<meta property="article:author" content="Muming">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://kiritostna.github.io/Rice/2020/03/17/2017_ACM_ICPC_Beijing_Regional/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>2017 ACM ICPC Beijing Regional | Rice's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/Rice/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Rice's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/Rice/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/Rice/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/Rice/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/Rice/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-training-records">
+
+    <a href="/Rice/training-records/" rel="section"><i class="fa fa-map fa-fw"></i>training-records</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/Rice/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://kiritostna.github.io/Rice/2020/03/17/2017_ACM_ICPC_Beijing_Regional/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/Rice/images/avatar.jpg">
+      <meta itemprop="name" content="Muming">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rice's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2017 ACM ICPC Beijing Regional
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-17 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-17T00:00:00+08:00">2020-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-10 23:08:18" itemprop="dateModified" datetime="2021-06-10T23:08:18+08:00">2021-06-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/Rice/categories/%E8%AE%AD%E7%BB%83/" itemprop="url" rel="index"><span itemprop="name">训练</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/362303#overview">比赛地址</a></p>
+<h2 id="E-Cats-and-Fish"><a href="#E-Cats-and-Fish" class="headerlink" title="E - Cats and Fish"></a>E - Cats and Fish</h2><p>优先队列维护一个$pair$, 第一关键字为吃完的时间，第二关键字为$&lt;速度，id&gt;$， 然后不断的模拟操作即可。</p>
+<p>注意最后遍历完所有的鱼之后，要再把队列前面刚好吃完的记录完整</p>
+<span id="more"></span>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x...) do &#123; cout <span class="meta-string">&lt;&lt; &quot;\033[32;1m&quot; &lt;&lt; #x &lt;&lt;&quot; -&gt;</span> <span class="meta-string">&quot;; err(x); &#125; while (0)</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">void err() &#123; cout &lt;&lt; &quot;</span>\033[39;0m<span class="meta-string">&quot; &lt;&lt; endl; &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">template&lt;class T, class... Ts&gt; void err(const T&amp; arg,const Ts&amp;... args) &#123; cout &lt;&lt; arg &lt;&lt; &quot;</span> <span class="meta-string">&quot;; err(args...); &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">const int N = 100000 + 5;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">#define mk make_pair</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int m, n, x, tim;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int c[N];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">priority_queue&lt;pair&lt;int,pair&lt;int,int&gt;&gt;&gt; q;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta"></span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int main() &#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    while(~scanf(&quot;</span>%d%d%d<span class="meta-string">&quot;,&amp;m,&amp;n,&amp;tim))&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        while(q.size())q.pop();</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=1;i&lt;=n;i++)scanf(&quot;</span>%d<span class="meta-string">&quot;,&amp;c[i]),q.push(&#123;0, &#123;-c[i], i&#125;&#125;);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        int cnt = 0, tot = 0;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=1;i&lt;=m&amp;&amp;q.size();i++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            int t = -q.top().first, x = q.top().second.second;q.pop();</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            if(t &gt; 0 &amp;&amp; t &lt;= tim) cnt++;//吃掉的完整的</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            if(t &gt;= tim) continue;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            tot ++; //喂了的</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            q.push(&#123;-(t+c[x]), &#123;-c[x],x&#125;&#125;);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        while(q.size())&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            int t = -q.top().first, x = q.top().second.second;q.pop();</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            if(t &gt; 0 &amp;&amp; t &lt;= tim) cnt++;//吃掉的完整的</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        printf(&quot;</span>%d %d\n<span class="meta-string">&quot;, m - tot, tot - cnt);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    return 0;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="H-Puzzle-Game"><a href="#H-Puzzle-Game" class="headerlink" title="H - Puzzle Game"></a>H - Puzzle Game</h2><p>修改的数字必须在所有最大子矩阵的交集中，枚举修改的这个数字，原本的最大子矩阵值变成了$Max-x+val$, 但是可能修改后，这个值并不是最大的，假如修改的位置是$(x,y)$，那么意味着前 $x - 1$ 行，从 $x+1$ 开始后面行，亦或者是前 $y-1$ 列，从 $y+1$ 开始的后面的列，这四种的最大子矩阵都可能是答案的选择，所以要先$O(n^3)$ 把这些预处理出来，然后对于每个枚举的位置，$O(1)$ 的获得答案</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> dbg(x...) do &#123; cout <span class="meta-string">&lt;&lt; &quot;\033[32;1m&quot; &lt;&lt; #x &lt;&lt;&quot; -&gt;</span> <span class="meta-string">&quot;; err(x); &#125; while (0)</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">void err() &#123; cout &lt;&lt; &quot;</span>\033[39;0m<span class="meta-string">&quot; &lt;&lt; endl; &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">template&lt;class T, class... Ts&gt; void err(const T&amp; arg,const Ts&amp;... args) &#123; cout &lt;&lt; arg &lt;&lt; &quot;</span> <span class="meta-string">&quot;; err(args...); &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">const int N = 150 + 5;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int n, m, p;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int a[N][N], sum[N][N], d[N][N][N], row[N][N][N];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int up[N], down[N], le[N], ri[N], f[N][N][N];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta"></span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int get(int x, int y)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    int res = max(max(up[x-1], down[x+1]), max(le[y-1], ri[y+1]));</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    return res;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">&#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">int main() &#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    while(~scanf(&quot;</span>%d%d%d<span class="meta-string">&quot;,&amp;n,&amp;m,&amp;p))&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        memset(up, 0xcf, sizeof up);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        memset(down, 0xcf, sizeof down);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        memset(le, 0xcf, sizeof le);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        memset(ri, 0xcf, sizeof ri);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        memset(f, 0xcf, sizeof f);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        memset(d, 0xcf, sizeof d);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta"></span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=1;i&lt;=n;i++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            for(int j=1;j&lt;=m;j++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                scanf(&quot;</span>%d<span class="meta-string">&quot;,&amp;a[i][j]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                sum[i][j] = sum[i][j-1] + a[i][j];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta"></span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        int mx = -inf;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int col = 1; col &lt;= m; col++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            for(int i = 1; i &lt;= n; i++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                for(int j = 1; j+col-1 &lt;= m; j++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    int val = sum[i][j+col-1] - sum[i][j-1];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    row[i][j][col] = i;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    d[i][j][col] = val;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    if(val + d[i-1][j][col] &gt; val)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        d[i][j][col] = val + d[i-1][j][col];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        row[i][j][col] = row[i-1][j][col];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    mx = max(mx, d[i][j][col]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        //求所有最大子矩阵</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        int x = 0, y = 0, x2 = inf, y2 = inf;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int col = 1; col &lt;= m; col++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            for(int i=1; i&lt;=n; i++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                for(int j=1;j+col-1&lt;=m;j++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    if(d[i][j][col] == mx)&#123;      </span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        x = max(x, row[i][j][col]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        y = max(y, j);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        x2 = min(x2, i);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        y2 = min(y2, j + col - 1);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        //没有交集</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        if(x &gt; x2 || y &gt; y2) &#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            printf(&quot;</span>%d\n<span class="meta-string">&quot;, mx);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            continue;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        </span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        //处理up， ri，le</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=1;i&lt;=n;i++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            for(int j=1;j&lt;=m;j++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                for(int k=1;k&lt;=m;k++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    up[i] = max(up[i], d[i][j][k]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    ri[j] = max(ri[j], d[i][j][k]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    le[j+k-1] = max(le[j+k-1], d[i][j][k]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        //倒着求，顺便求down</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int col = 1; col &lt;= m; col++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            for(int i = n; i &gt;= 1; i--)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                for(int j = 1;j+col-1 &lt;= m;j++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    int val = sum[i][j+col-1] - sum[i][j-1];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    f[i][j][col] = val;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    if(val + f[i+1][j][col] &gt; val)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                        f[i][j][col] = val + f[i+1][j][col];</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                    down[i] = max(down[i], f[i][j][col]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        //更新</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=1;i&lt;=n;i++) up[i] = max(up[i-1], up[i]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=1;i&lt;=m;i++) le[i] = max(le[i-1], le[i]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=m;i&gt;=1;i--) ri[i] = max(ri[i], ri[i+1]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=n;i&gt;=1;i--) down[i] = max(down[i+1], down[i]);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        int res = mx;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        //暴力修改</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        for(int i=x;i&lt;=x2;i++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            for(int j=y;j&lt;=y2;j++)&#123;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">                res = min(res, max(get(i,j), mx - a[i][j] + p));</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">            &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">        printf(&quot;</span>%d\n<span class="meta-string">&quot;, res);</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    &#125;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">    return 0;</span></span></span><br><span class="line"><span class="meta-string"><span class="meta">&#125;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="J-Pangu-and-Stones"><a href="#J-Pangu-and-Stones" class="headerlink" title="J - Pangu and Stones"></a>J - Pangu and Stones</h2><p><strong>题意：</strong></p>
+<p>给定$n$堆石子，每次可以连续合并$[L,R]$堆石子，石子合并的代价是这一堆石子的重量和，问合并成一堆的最小代价。</p>
+<p><strong>思路：</strong></p>
+<p>首先确立区间$dp$的思路是没有问题的。</p>
+<p>考虑怎么表示一个状态。</p>
+<p>因为每次都是连续的拿一段，所以对于一段区间$[l,r]$来说，我们考虑的是将他划分成若干段后的答案。</p>
+<p>设$f(l,r,k)$表示区间$[l,r]$带来的最小消耗。</p>
+<p>之后套区间$dp$模板，第一步枚举区间长度，第二步枚举左端点。</p>
+<p>然后枚举划分的段数，注意段数取$min(R,len)$。</p>
+<p>枚举划分区间的位置，有：<br>$$<br>f(l,r,k)=min(f(l,r,k),f(l,t,k-1)+f(t+1,r,1))<br>$$<br>最后这一段区间的答案是整段区间的答案，所以还要将其合并为一段：<br>$$<br>f(l,r,1)=min(f(l,r,1),f(l,t,k-1)+f(t+1,r,1)+s(r)-s(l-1))<br>$$<br>加上这一段的和其实就相当于把它们合并成一段了。</p>
+<p>时间复杂度是$O(n^4)$的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1e2</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> f[maxn][maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> n, L, R;</span><br><span class="line"><span class="keyword">int</span> s[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(f));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, x; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x);</span><br><span class="line">        s[i] = s[i<span class="number">-1</span>]+x;</span><br><span class="line">        f[i][i][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> len = <span class="number">2</span>; len &lt;= n; len++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= n-len+<span class="number">1</span>; l++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> r = len+l<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">2</span>; k &lt;= <span class="built_in">min</span>(R, len); k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> t = l+(k<span class="number">-1</span>)<span class="number">-1</span>; t &lt; r; t++)</span><br><span class="line">        f[l][r][k] = <span class="built_in">min</span>(f[l][r][k], f[l][t][k<span class="number">-1</span>]+f[t+<span class="number">1</span>][r][<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = L; k &lt;= <span class="built_in">min</span>(R, len); k++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> t = l+(k<span class="number">-1</span>)<span class="number">-1</span>; t &lt; r; t++)</span><br><span class="line">        f[l][r][<span class="number">1</span>] = <span class="built_in">min</span>(f[l][r][<span class="number">1</span>], f[l][t][k<span class="number">-1</span>]+f[t+<span class="number">1</span>][r][<span class="number">1</span>]+(s[r]-s[l<span class="number">-1</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(f[<span class="number">1</span>][n][<span class="number">1</span>] == <span class="number">0x3f3f3f3f</span>) f[<span class="number">1</span>][n][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f[<span class="number">1</span>][n][<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>, &amp;n, &amp;L, &amp;R) != EOF) <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Rice/2020/03/14/Preliminaries_for_BAPC_2019/" rel="prev" title="Preliminaries for BAPC 2019">
+      <i class="fa fa-chevron-left"></i> Preliminaries for BAPC 2019
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Rice/2020/03/21/2017_ACM-ICPC_Xi'an_Regional/" rel="next" title="2017 ACM-ICPC Xi'an Regional">
+      2017 ACM-ICPC Xi'an Regional <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#E-Cats-and-Fish"><span class="nav-number">1.</span> <span class="nav-text">E - Cats and Fish</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#H-Puzzle-Game"><span class="nav-number">2.</span> <span class="nav-text">H - Puzzle Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#J-Pangu-and-Stones"><span class="nav-number">3.</span> <span class="nav-text">J - Pangu and Stones</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Muming"
+      src="/Rice/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Muming</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/Rice/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/Rice/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Muming</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/Rice/lib/anime.min.js"></script>
+  <script src="/Rice/lib/velocity/velocity.min.js"></script>
+  <script src="/Rice/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/Rice/js/utils.js"></script>
+
+<script src="/Rice/js/motion.js"></script>
+
+
+<script src="/Rice/js/schemes/pisces.js"></script>
+
+
+<script src="/Rice/js/next-boot.js"></script>
+
+
+  <script defer src="/Rice/lib/three/three.min.js"></script>
+    <script defer src="/Rice/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/Rice/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
